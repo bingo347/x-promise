@@ -29,4 +29,13 @@
             return result;
         });
     });
+
+    defMethod(P, 'defer', function defer() {
+        var d = {};
+        d.promise = new P(function(resolve, reject) {
+            d.resolve = resolve;
+            d.reject = reject;
+        });
+        return d;
+    });
 }));
