@@ -71,4 +71,22 @@
         cb.promise = d.promise;
         return cb;
     });
+
+    defMethod(P, 'attempt', function attempt(func) {
+        return this.resolve().then(func);
+    });
+
+    defMethod(P, 'delay', function delay(t) {
+        return new P(function(resolve) {
+            if(typeof t !== 'number') {
+                if(typeof setImmediate === 'function') {
+                    setImmediate(resolve);
+                    return;
+                }
+                setTimeout(resolve, 0)
+                return;
+            }
+            setTimeout(resolve, t);
+        });
+    });
 }));
