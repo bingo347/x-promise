@@ -38,4 +38,37 @@
         });
         return d;
     });
+
+    defMethod(P, 'callback', function callback() {
+        var d = this.defer();
+        var cb = function(err, a1, a2, a3) {
+            if(err) {
+                return d.reject(err);
+            }
+            var len = arguments.length;
+            switch(len) {
+                case 0:
+                case 1:
+                    d.resolve();
+                    break;
+                case 2:
+                    d.resolve(a1);
+                    break;
+                case 3:
+                    d.resolve([a1, a2]);
+                    break;
+                case 4:
+                    d.resolve([a1, a2, a3]);
+                    break;
+                default:
+                    var args = new Array(len - 1);
+                    while(--len) {
+                        args[len - 1] = arguments[len]
+                    }
+                    d.resolve.call(void 0, args)
+            }
+        };
+        cb.promise = d.promise;
+        return cb;
+    });
 }));
