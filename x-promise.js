@@ -1,7 +1,6 @@
 ;(function(f){typeof Promise==='function'&&f(Promise)}(function(P){
     'use strict';
     var pp = P.prototype;
-    var gopn = Object.getOwnPropertyNames;
 
     function defMethod(target, name, func) {
         if(typeof target[name] === 'function') return;
@@ -14,7 +13,7 @@
     }
 
     defMethod(P, 'props', function props(obj) {
-        var keys = gopn(obj);
+        var keys = Object.getOwnPropertyNames(obj);
         var i, len = i = keys.length;
         var arr = new Array(len);
         while(--i + 1) {
