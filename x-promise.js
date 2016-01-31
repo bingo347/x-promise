@@ -78,7 +78,8 @@
 
     defMethod(P, 'delay', function delay(t) {
         return new P(function(resolve) {
-            if(typeof t !== 'number') {
+            var _t = parseInt(t);
+            if(typeof t !== 'number' && _t !== _t) {
                 if(typeof setImmediate === 'function') {
                     setImmediate(resolve);
                     return;
@@ -86,7 +87,7 @@
                 setTimeout(resolve, 0)
                 return;
             }
-            setTimeout(resolve, t);
+            setTimeout(resolve, _t);
         });
     });
 }));
