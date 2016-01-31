@@ -14,21 +14,21 @@ Promise.props({
     }, 'props');
 });
 
-;(_ => {
+;(()=> {
     var cb = Promise.callback();
     cb(null, true);
     return cb.promise;
 })().then(r => {
     assert.equal(r, true, 'callback #1');
 });
-;(_ => {
+;(()=> {
     var cb = Promise.callback();
     cb(null, 1, 2, 3, 4, 5, 6, 7);
     return cb.promise;
 })().then(r => {
     assert.deepEqual(r, [1, 2, 3, 4, 5, 6, 7], 'callback #2');
 });
-;(_ => {
+;(()=> {
     var cb = Promise.callback();
     cb(new Error(''));
     return cb.promise;

@@ -65,7 +65,7 @@
                     while(--len) {
                         args[len - 1] = arguments[len]
                     }
-                    d.resolve.call(void 0, args)
+                    d.resolve(args)
             }
         };
         cb.promise = d.promise;
