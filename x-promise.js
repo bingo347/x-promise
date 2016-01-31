@@ -89,4 +89,21 @@
             setTimeout(resolve, _t);
         });
     });
+
+    defMethod(pp, 'delay', function delay(t) {
+        return this.then(function(value) {
+            return new P(function(resolve) {
+                var _t = parseInt(t);
+                if(typeof t !== 'number' && _t !== _t) {
+                    if(typeof setImmediate === 'function') {
+                        setImmediate(resolve, value);
+                        return;
+                    }
+                    setTimeout(resolve, 0, value)
+                    return;
+                }
+                setTimeout(resolve, _t, value);
+            });
+        });
+    });
 }));
