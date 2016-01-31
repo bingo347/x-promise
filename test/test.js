@@ -57,4 +57,17 @@ Promise
         console.info('ok: tap');
     });
 
+Promise.resolve(1).delay(100).timeout(500).then(a => {
+    assert.equal(a, 1, 'timeout #1');
+    console.info('ok: timeout #1');
+}).catch(err => {
+    console.error('fail: timeout #1');
+});
+Promise.delay(500).timeout(100, 'test').then(()=> {
+    console.info('fail: timeout #2');
+}).catch(err => {
+    assert.equal(err.message, 'test', 'timeout #2');
+    console.error('ok: timeout #2');
+});
+
 console.info('ok');

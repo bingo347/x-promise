@@ -118,5 +118,20 @@
             func.call(this, value)
             return value;
         });
-    })
+    });
+
+    defMethod(pp, 'timeout', function timeout(t, err) {
+        return P.race([
+            this,
+            P.delay(t).then(function() {
+                if(err instanceof Error) {
+                    throw err;
+                }
+                if(typeof err === 'string') {
+                    throw new Error(err);
+                }
+                throw new Error('Promise timeout');
+            })
+        ]);
+    });
 }));
