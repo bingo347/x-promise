@@ -107,9 +107,16 @@
         });
     });
 
-    defMethod(pp, 'spread', function(func) {
+    defMethod(pp, 'spread', function spread(func) {
         return this.then(function(value) {
             return func.apply(this, value);
         });
     });
+
+    defMethod(pp, 'tap', function tap(func) {
+        return this.then(function(value) {
+            func.call(this, value)
+            return value;
+        });
+    })
 }));
