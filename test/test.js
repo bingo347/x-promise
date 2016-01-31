@@ -38,4 +38,10 @@ Promise.props({
     assert.equal(r instanceof Error, true, 'callback #3');
 });
 
+Promise.all([1, 2, 3]).spread((a, b, c) => {
+    assert.equal(a, 1, 'spread');
+    assert.equal(b, 2, 'spread');
+    assert.equal(c, 3, 'spread');
+});
+
 console.log('ok');

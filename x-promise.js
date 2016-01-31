@@ -106,4 +106,10 @@
             });
         });
     });
+
+    defMethod(pp, 'spread', function(func) {
+        return this.then(function(value) {
+            return func.apply(this, value);
+        });
+    });
 }));
