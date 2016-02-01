@@ -6,10 +6,10 @@ The library extends the functionality of native promises
 `npm install x-promise`
 
 ## Using
-In node/browserify/webpack:
+In node/browserify/webpack:<br/>
 `require('x-promise')`
-In browser (without module system):
-copy x-promise.js to your public directory
+In browser (without module system):<br/>
+copy x-promise.js to your public directory<br/>
 ```
 <!-- optional, for old browsers -->
 <script src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
@@ -18,8 +18,8 @@ copy x-promise.js to your public directory
 ```
 
 ## Added functionality
-- Promise.defer()
-return object with fields **promise**, **resolve**, **reject**
+- Promise.defer()<br/>
+return object with fields **promise**, **resolve**, **reject**<br/>
 ### Example
 ```
 var deferred = Promise.defer();
