@@ -7,7 +7,7 @@ The library extends the functionality of native promises
 
 ## Using
 In node/browserify/webpack:<br/>
-`require('x-promise')`
+`require('x-promise')`<br/>
 In browser (without module system):<br/>
 copy x-promise.js to your public directory<br/>
 ```
@@ -20,12 +20,37 @@ copy x-promise.js to your public directory<br/>
 ## Added functionality
 - Promise.defer()<br/>
 return object with fields **promise**, **resolve**, **reject**<br/>
-### Example
 ```
 var deferred = Promise.defer();
-fs.readFile('/etc/passwd', (err, data) => {
+fs.readFile('/path/to/someFile', (err, data) => {
     if (err) return deferred.reject(err);
     deferred.resolve(data);
 });
 deferred.promise.then(/* ... */)
+```
+
+- Promise.callback()<br/>
+return function<br/>
+```
+var cb = Promise.callback();
+fs.readFile('/path/to/someFile', cb);
+cb.promise.then(data => {/* ... */})
+
+var cb = Promise.callback();
+child_process.exec('someCommand', cb);
+cb.promise.spread((stdout, stderr) => /* ... */})
+```
+
+- Promise.props(dictionary)<br/>
+like Promise.all, but work with dictionary<br/>
+```
+Promise.props({
+    a : Promise.resolve(1),
+    b : Promise.resolve(2),
+    c : Promise.resolve(3)
+}).then(result => {
+    console.log(result.a); // 1
+    console.log(result.b); // 2
+    console.log(result.c); // 3
+})
 ```
