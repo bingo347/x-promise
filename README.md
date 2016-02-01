@@ -42,7 +42,7 @@ cb.promise.spread((stdout, stderr) => /* ... */})
 ```
 
 - Promise.props(dictionary)<br/>
-like Promise.all, but work with dictionary<br/>
+It's like Promise.all, but work with dictionary<br/>
 ```
 Promise.props({
     a : Promise.resolve(1),
@@ -80,5 +80,28 @@ somePromise.timeout(500).then(result => {
     /* ... */
 }).catch(error => {
     /* ... */
+})
+```
+
+- promiseInstanse.spread(function())<br/>
+It's like promiseInstanse.then, but spread resolved array in arguments<br/>
+```
+Promise.resolve([1, 2, 3]).spread((a, b, c) => {
+    console.log(a); // 1
+    console.log(b); // 2
+    console.log(c); // 3
+});
+```
+
+- promiseInstanse.tap(function())<br/>
+It inject some function in promise sequence and will forward result further
+```
+somePromise.then(result => {
+    /* ... */
+    return 1;
+}).tap(result => {
+    console.log(result); // 1
+}).then(result => {
+    console.log(result); // 1
 })
 ```
