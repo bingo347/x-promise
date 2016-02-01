@@ -19,7 +19,7 @@ copy x-promise.js to your public directory<br/>
 
 ## Added functionality
 - Promise.defer()<br/>
-return object with fields **promise**, **resolve**, **reject**<br/>
+return deferred object with fields **promise**, **resolve**, **reject**<br/>
 ```
 var deferred = Promise.defer();
 fs.readFile('/path/to/someFile', (err, data) => {
@@ -52,5 +52,33 @@ Promise.props({
     console.log(result.a); // 1
     console.log(result.b); // 2
     console.log(result.c); // 3
+})
+```
+
+- Promise.attempt(function())<br/>
+It's short alias for Promise.resolve().then<br/>
+```
+Promise.attempt(() => {/* ... */})
+```
+
+- Promise.delay([milliseconds])<br/>
+promiseInstanse.delay([milliseconds])<br/>
+setTimeout and setImmediate wrapped in Promise
+```
+somePromise.then(result => {
+    /* ... */
+    return 1;
+}).delay(100).then(result => {
+    console.log(result); // 1
+})
+```
+
+- promiseInstanse.timeout(milliseconds[, errorInstanse | (string) message])<br/>
+It's wrap promiseInstanse, promise will be rejected if promiseInstanse is not resolved or rejected within milliseconds<br/>
+```
+somePromise.timeout(500).then(result => {
+    /* ... */
+}).catch(error => {
+    /* ... */
 })
 ```
