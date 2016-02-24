@@ -1,6 +1,12 @@
 ;(function(f){typeof Promise==='function'&&f(Promise)}(function(P){
     'use strict';
     var pp = P.prototype;
+    Object.defineProperty(P, '@XPromiseVersion', {
+        configurable : true,
+        writable : false,
+        enumerable : false,
+        value : '1.1.0'
+    });
 
     function defMethod(target, name, func) {
         if(typeof target[name] === 'function') return;
