@@ -27,7 +27,7 @@
         var keys = Object.getOwnPropertyNames(obj);
         var i, len = i = keys.length;
         var arr = new Array(len);
-        while(--i + 1) {
+        while(i--) {
             arr[i] = obj[keys[i]];
         }
         return this.all(arr).then(function(rArr) {
