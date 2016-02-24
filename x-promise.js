@@ -204,4 +204,16 @@
             );
         });
     });
+
+    /**
+     * Promise.map
+     * @param (Array) arr
+     * @param (function(value, index, array)) func
+     * @return (Promise)
+     */
+    defMethod(P, 'map', function map(arr, func) {
+        return this.all(
+            Array.prototype.slice.call(arr)
+        ).map(func);
+    });
 }));
