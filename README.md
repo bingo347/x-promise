@@ -1,6 +1,6 @@
 # x-promise
 The library extends the functionality of native promises
-<br><i>It's not polyfill!</i>
+<br><i>It's not polyfill!</i><br>ES5 compatible
 
 ## Installation
 `npm install x-promise`
@@ -9,6 +9,12 @@ The library extends the functionality of native promises
 In node/browserify/webpack:
 ```javascript
 require('x-promise')
+```
+No-conflict version, for use in other libraries (works only in node.js)
+```javascript
+const XPromise = require('x-promise/no-conflict')();
+//or with any polyfill
+const XMyPromise = require('x-promise/no-conflict')(MyPromise);
 ```
 In browser (without module system):<br/>
 copy x-promise.min.js to your public directory
