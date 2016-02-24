@@ -12,6 +12,11 @@
         });
     }
 
+    /**
+     * Promise.props
+     * @param (Object) obj
+     * @return (Promise)
+     */
     defMethod(P, 'props', function props(obj) {
         var keys = Object.getOwnPropertyNames(obj);
         var i, len = i = keys.length;
@@ -29,6 +34,16 @@
         });
     });
 
+    /**
+     * Promise.defer
+     * @return (Object) defered object
+     *
+     * Defered {
+     *  (Promise) promise
+     *  (function(value)) resolve
+     *  (function((Error) error)) reject
+     * }
+     */
     defMethod(P, 'defer', function defer() {
         var d = {};
         d.promise = new P(function(resolve, reject) {
@@ -38,6 +53,11 @@
         return d;
     });
 
+    /**
+     * Promise.callback
+     * @return (function((Error) error), ...values)) cb
+     * (Promise) cb.promise
+     */
     defMethod(P, 'callback', function callback() {
         var d = this.defer();
         var cb = function(err, a1, a2, a3) {
@@ -71,10 +91,20 @@
         return cb;
     });
 
+    /**
+     * Promise.attempt
+     * @param (function()) func
+     * @return (Promise)
+     */
     defMethod(P, 'attempt', function attempt(func) {
         return this.resolve().then(func);
     });
 
+    /**
+     * Promise.delay
+     * @param (int) t time in milliseconds
+     * @return (Promise)
+     */
     defMethod(P, 'delay', function delay(t) {
         return new P(function(resolve) {
             var _t = parseInt(t);
@@ -90,6 +120,11 @@
         });
     });
 
+    /**
+     * Promise.prototype.delay
+     * @param (int) t time in milliseconds
+     * @return (Promise)
+     */
     defMethod(pp, 'delay', function delay(t) {
         return this.then(function(value) {
             return new P(function(resolve) {
@@ -107,12 +142,22 @@
         });
     });
 
+    /**
+     * Promise.prototype.spread
+     * @param (function(...values)) func
+     * @return (Promise)
+     */
     defMethod(pp, 'spread', function spread(func) {
         return this.then(function(value) {
             return func.apply(this, value);
         });
     });
 
+    /**
+     * Promise.prototype.tap
+     * @param (function(value)) func
+     * @return (Promise)
+     */
     defMethod(pp, 'tap', function tap(func) {
         return this.then(function(value) {
             func.call(this, value)
@@ -120,6 +165,12 @@
         });
     });
 
+    /**
+     * Promise.prototype.delay
+     * @param (int) t time in milliseconds
+     * @param !optional (Error|string) err
+     * @return (Promise)
+     */
     defMethod(pp, 'timeout', function timeout(t, err) {
         return P.race([
             this,
