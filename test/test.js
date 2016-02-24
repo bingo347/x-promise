@@ -80,4 +80,12 @@ Promise.resolve([1, 2, 3, 4]).reduce((a, b) => a + b).then(a => {
     console.info('ok: reduce');
 });
 
+Promise.resolve(['a', 'b', 'c']).reduce((r, v, i) => {
+    r[v] = Promise.resolve(i);
+    return r;
+}, {}).then(Promise.props.bind(Promise)).then(a => {
+    assert.deepEqual(a, {a:0, b:1, c:2}, 'reduce+props');
+    console.info('ok: reduce+props');
+});
+
 console.info('ok');
