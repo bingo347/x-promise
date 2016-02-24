@@ -1,20 +1,22 @@
 # x-promise
 The library extends the functionality of native promises
-*It's not polyfill!*
+<br><i>It's not polyfill!</i>
 
 ## Installation
 `npm install x-promise`
 
 ## Using
-In node/browserify/webpack:<br/>
-`require('x-promise')`<br/>
-In browser (without module system):<br/>
-copy x-promise.js to your public directory<br/>
+In node/browserify/webpack:
+```javascript
+require('x-promise')
 ```
+In browser (without module system):<br/>
+copy x-promise.min.js to your public directory
+```html
 <!-- optional, for old browsers -->
 <script src="//cdn.polyfill.io/v2/polyfill.min.js"></script>
 
-<script src="/path/to/x-promise.js"></script>
+<script src="/path/to/x-promise.min.js"></script>
 ```
 
 ## Added functionality
