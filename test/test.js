@@ -75,4 +75,9 @@ Promise.resolve([1, 2, 3]).map(a => a + 1).then(a => {
     console.info('ok: map');
 });
 
+Promise.resolve([1, 2, 3, 4]).reduce((a, b) => a + b).then(a => {
+    assert.equal(a, 10, 'reduce');
+    console.info('ok: reduce');
+});
+
 console.info('ok');

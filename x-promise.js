@@ -216,4 +216,18 @@
             Array.prototype.slice.call(arr)
         ).map(func);
     });
+
+    /**
+     * Promise.prototype.reduce
+     * @param (function(previousValue, currentValue, index, array)) func
+     * @param !optional initialValue
+     * @return (Promise)
+     */
+    defMethod(pp, 'reduce', function reduce(func, initialValue) {
+        var args = new Array(arguments.length);
+        for(var i = arguments.length; i--;) args[i] = arguments[i];
+        return this.then(function(value) {
+            return Array.prototype.reduce.apply(value, args);
+        });
+    });
 }));
