@@ -191,4 +191,17 @@
             })
         ]);
     });
+
+    /**
+     * Promise.prototype.map
+     * @param (function(value, index, array)) func
+     * @return (Promise)
+     */
+    defMethod(pp, 'map', function map(func) {
+        return this.then(function(value) {
+            return P.all(
+                Array.prototype.map.call(value, func)
+            );
+        });
+    });
 }));

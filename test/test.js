@@ -70,4 +70,9 @@ Promise.delay(500).timeout(100, 'test').then(()=> {
     console.error('ok: timeout #2');
 });
 
+Promise.resolve([1, 2, 3]).map(a => a + 1).then(a => {
+    assert.deepEqual(a, [2, 3, 4], 'map');
+    console.info('ok: map');
+});
+
 console.info('ok');
