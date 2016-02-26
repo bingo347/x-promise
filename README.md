@@ -10,7 +10,7 @@ In node/browserify/webpack:
 ```javascript
 require('x-promise')
 ```
-No-conflict version, for use in other libraries (works only in node.js)
+No-conflict version, for use in other libraries
 ```javascript
 const XPromise = require('x-promise/no-conflict')();
 //or with any polyfill

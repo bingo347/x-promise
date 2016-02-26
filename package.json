@@ -1,10 +1,11 @@
 {
   "name": "x-promise",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "The library extends the functionality of native promises",
   "main": "x-promise.js",
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node test/test.js",
+    "build": "uglifyjs x-promise.js -o x-promise.min.js; echo \"'use strict';function xpModule(Promise){\"$(cat x-promise.min.js)\"}\" > no-conflict.js; cat no-conflict.proto.js >> no-conflict.js"
   },
   "repository": {
     "type": "git",
