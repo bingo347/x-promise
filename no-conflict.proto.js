@@ -1,5 +1,8 @@
 
+var cashe = {};
 module.exports = function(OtherPromise) {
+    var casheKey = String(OtherPromise);
+    if(casheKey in cashe) return cashe[casheKey];
     var TargetPromise = OtherPromise || global.Promise;
     function XPromise() {
         TargetPromise.apply(this, arguments);
@@ -16,5 +19,6 @@ module.exports = function(OtherPromise) {
         });
     });
     xpModule(XPromise);
+    cashe[casheKey] = XPromise;
     return XPromise;
 }
