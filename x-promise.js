@@ -1,7 +1,7 @@
 ;(function(f){typeof Promise==='function'&&f(Promise)}(function(P){
     'use strict';
     var pp = P.prototype;
-    
+
     function defMethod(target, name, func) {
         if(typeof target[name] === 'function') return;
         Object.defineProperty(target, name, {
@@ -195,8 +195,10 @@
     defMethod(pp, 'map', function map(func) {
         return this.then(function(value) {
             return P.all(
-                Array.prototype.map.call(value, func)
+                Array.prototype.slice.call(value)
             );
+        }).then(function(value) {
+            return P.all(value.map(func))
         });
     });
 
@@ -207,9 +209,7 @@
      * @return (Promise)
      */
     defMethod(P, 'map', function map(arr, func) {
-        return this.all(
-            Array.prototype.slice.call(arr)
-        ).map(func);
+        return this.resolve(arr).map(func);
     });
 
     /**
