@@ -225,4 +225,22 @@
             return Array.prototype.reduce.apply(value, args);
         });
     });
+
+    /**
+     * Promise.fnwrap
+     * @param (function(resolve, reject, ...args)) func
+     * @return (function(...args))
+     */
+    defMethod(P, 'fnwrap', function fnwrap(func) {
+        return function() {
+            var self = this;
+            var args = new Array(arguments.length + 2);
+            for(var i = arguments.length; i--;) args[i + 2] = arguments[i];
+            return new P(function(resolve, reject) {
+                args[0] = resolve;
+                args[1] = reject;
+                func.apply(self, args);
+            });
+        };
+    });
 }));

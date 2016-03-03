@@ -88,4 +88,11 @@ Promise.resolve(['a', 'b', 'c']).reduce((r, v, i) => {
     console.info('ok: reduce+props');
 });
 
+Promise.fnwrap((resolve, reject, a) => {
+    setTimeout(resolve, 500, a);
+})(10).then(a => {
+    assert.equal(a, 10, 'fnwrap');
+    console.info('ok: fnwrap');
+});
+
 console.info('ok');
