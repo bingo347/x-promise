@@ -243,4 +243,44 @@
             });
         };
     });
+
+    /**
+     * Promise.coroutine
+     * @param (function*(...args)) func
+     * @return (function(...args))
+     */
+    defMethod(P, 'coroutine', function coroutine(func) {
+        var P = this;
+        function run(resolve, reject, generator, action, arg) {
+            try {
+                var iter = generator[action](arg);
+            } catch(error) {
+                return reject(error);
+            }
+            var value = P.resolve(iter.value);
+            if(iter.done) {
+                return value.then(resolve, reject);
+            }
+            value.then(function(value) {
+                run(resolve, reject, generator, 'next', value);
+            }, function(error) {
+                run(resolve, reject, generator, 'throw', error);
+            });
+        }
+        return function() {
+            var self = this;
+            var args = new Array(arguments.length);
+            for(var i = arguments.length; i--;) args[i] = arguments[i];
+            return P.attempt(function() {
+                return func.apply(self, args);
+            }).then(function(generator) {
+                if(!generator || typeof generator.next !== 'function' || typeof generator.throw !== 'function') {
+                    return generator;
+                }
+                return new P(function(resolve, reject) {
+                    run(resolve, reject, generator, 'next');
+                });
+            });
+        };
+    });
 }));

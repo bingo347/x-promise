@@ -95,4 +95,23 @@ Promise.fnwrap((resolve, reject, a) => {
     console.info('ok: fnwrap');
 });
 
+Promise.coroutine(function*(a) {
+    var b = yield Promise.delay(100).then(() => {
+        return a + 1;
+    });
+    return Promise.delay(100).then(() => {
+        return b + 1;
+    });
+})(1).then(a => {
+    assert.equal(a, 3, 'coroutine #1');
+    console.info('ok: coroutine #1');
+});
+
+Promise.coroutine(function*() {
+    throw new Error('test');
+})().catch(err => {
+    assert.equal(err.message, 'test', 'coroutine #2');
+    console.error('ok: coroutine #2');
+});
+
 console.info('ok');
