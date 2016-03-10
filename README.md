@@ -38,3 +38,5 @@ copy x-promise.min.js to your public directory
 * [Promise.map(array, function(value, index, array))](https://github.com/bingo347/x-promise/wiki/.map())
 * [promiseInstanse.map(function(value, index, array))](https://github.com/bingo347/x-promise/wiki/.map())
 * [promiseInstanse.reduce(function(previousValue, currentValue, index, array)[, initialValue])](https://github.com/bingo347/x-promise/wiki/.reduce())
+* [Promise.fnwrap(function(resolve, reject, ...args))](https://github.com/bingo347/x-promise/wiki/Promise.fnwrap())
+* [Promise.coroutine(function*(...args))](https://github.com/bingo347/x-promise/wiki/Promise.coroutine())
