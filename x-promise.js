@@ -250,7 +250,6 @@
      * @return (function(...args))
      */
     defMethod(P, 'coroutine', function coroutine(func) {
-        var P = this;
         function run(resolve, reject, generator, action, arg) {
             try {
                 var iter = generator[action](arg);

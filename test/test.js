@@ -106,7 +106,6 @@ Promise.coroutine(function*(a) {
     assert.equal(a, 3, 'coroutine #1');
     console.info('ok: coroutine #1');
 });
-
 Promise.coroutine(function*() {
     throw new Error('test');
 })().catch(err => {
