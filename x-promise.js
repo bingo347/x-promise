@@ -11,7 +11,7 @@
             value : func
         });
     }
-    defMethod(P, '@XPromiseVersion', '1.1.1');
+    defMethod(P, '@XPromiseVersion', '1.2.0');
 
     /**
      * Promise.props
